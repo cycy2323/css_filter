@@ -1,0 +1,110 @@
+$bg: #f4f4f4;
+
+body{
+    background: $bg;
+}
+.main{
+    margin: 0;
+    padding: 0;
+}
+// // grayscale 灰阶
+// .grayscale{
+//     filter: grayscale(50%);
+
+// }
+// // saturate 饱和度
+// .saturate{
+//     filter: saturate(360%);
+// }
+
+// //sepia 棕褐色
+// .sepia{
+//     filter: sepia(100%);
+// }
+
+
+
+
+$filters: (
+	grayscale: '(50%)',//灰阶
+	saturate: '(360%)',//饱和度
+	sepia: '(100%)',//棕褐色
+	invert: '(100%)',//反色
+	opacity: '(50%)',//透明度
+	brightness: '(120%)',//亮度
+	contrast: '(160%)',//对比度
+	hue-rotate: '(160deg)', //色相旋转
+	blur: '(2px)',//模糊  
+	// box-shadow:'16px 16px 20px #f00',//阴影
+);
+
+@each $type, $value in $filters {
+	.#{$type} {
+		img {
+	      filter: #{$type}#{$value};
+		}
+	}
+}
+.drop-shadow img{
+    box-shadow:16px 16px 20px #f00
+}
+
+
+/* blur 混合 contrast 产生融合效果 */
+.filter-mix {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
+    filter: contrast(20);
+    background: #fff;
+}
+.filter-mix::before {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #333;
+    top: 40px;
+    left: 40px;
+    z-index: 2;
+    filter: blur(6px);
+    box-sizing: border-box;
+    animation: filterBallMove 4s ease-out infinite;
+}
+
+.filter-mix::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #3F51B5;
+    top: 60px;
+    right: 40px;
+    z-index: 2;
+    filter: blur(6px);
+    animation: filterBallMove2 4s ease-out infinite;
+}
+
+@keyframes filterBallMove {
+    50% {
+        left: 140px;
+    }
+}
+
+@keyframes filterBallMove2 {
+    50% {
+        right: 140px;
+    }
+}
+
+
+
+
+
+
+
